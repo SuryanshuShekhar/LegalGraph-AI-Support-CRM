@@ -1,0 +1,69 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html, body, #root { height: 100%; }
+
+  body {
+    position: relative;
+    color: rgb(var(--fg));
+    background-color: rgb(var(--bg));
+    background-image:
+  radial-gradient(1200px 700px at 10% -10%, rgba(79, 70, 229, 0.20), transparent 60%),    /* indigo */
+  radial-gradient(900px 600px  at 90% -10%, rgba(59, 130, 246, 0.14), transparent 65%),   /* blue */
+  radial-gradient(800px 500px  at 50% 110%, rgba(14, 165, 233, 0.10), transparent 60%),   /* sky/cyan */
+  linear-gradient(180deg, rgba(255,255,255,0.03), rgba(0,0,0,0.20));
+
+    background-attachment: fixed, fixed, fixed, fixed;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+
+  body::before,
+  body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  body::before {
+    opacity: 0.06; 
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140' viewBox='0 0 140 140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-size: 300px 300px;
+    mix-blend-mode: overlay;
+  }
+
+  body::after {
+    opacity: 0.07; 
+    background-image: radial-gradient(rgba(255,255,255,0.08) 1px, transparent 1.4px);
+    background-size: 22px 22px;
+  }
+
+  #root { position: relative; z-index: 1; }
+}
+
+
+@layer components {
+  .card {
+    @apply rounded-2xl shadow-soft border;
+    border-color: rgb(var(--ring));
+    background-color: rgb(var(--panel));
+  }
+  .panel { @apply card p-5; }
+  .subtle { color: rgb(var(--muted)); @apply text-sm; }
+  .btn {
+    @apply inline-flex items-center gap-2 px-4 py-2 rounded-xl border transition;
+    border-color: rgb(var(--ring));
+    background-color: rgb(var(--panel));
+    color: rgb(var(--fg));
+  }
+  .btn-primary {
+    @apply text-white border-transparent;
+    background-color: #111827;
+  }
+  .btn-primary:hover { filter: brightness(0.95); }
+  .badge { @apply inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium ring-1; }
+}
